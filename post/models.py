@@ -42,5 +42,6 @@ class Good(models.Model):
         else:
             return self.name
 
+# comm
 
 
