@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from .models import Country, Post, Category, Good
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 
 
 def posts(request):
@@ -20,6 +20,7 @@ def posts(request):
 
 def index(request, id):
     #cat_id = request.GET['id']
+    cats = Category.objects.all().order_by('name')
 
     if id == None:
         cat = Category.objects.first()
@@ -27,15 +28,13 @@ def index(request, id):
         try:
             cat = Category.objects.get(pk=id)
         except Category.DoesNotExist:
-            cat = cat = Category.objects.first()
+            raise Http404
 
 
     goods = Good.objects.filter(category=cat).order_by('name')
 
-    s = "Category: " + cat.name + "<br><br>"
-    for good in goods:
-        s = s + "(" + str(good.pk) + ")" + good.name + "<br>"
-    return HttpResponse(s)
+    content = {"category": cat, "cats": cats, "goods": goods}
+    return render(request, 'index.html', content)
 
 
 
@@ -46,8 +45,14 @@ def good(request, id):
         for good in goods:
             s = s + "(" + str(good.pk) + ")" + good.name + " - " + str(good.price) + " cat:  " + good.category.name + "<br>"
     else:
-        good = Good.objects.get(pk=id)
-        s = "(" + str(good.pk) + ")" + good.name + " - " +str(good.price) + "<br>"
+        try:
+            good = Good.objects.get(pk=id)
+            s = "(" + str(good.pk) + ")" + good.name + " - " +str(good.price) + "<br>"
+        except Good.DoesNotExist:
+            raise Http404
+
+    if not good.in_stock:
+        s = s + " nu este in Stock"
 
     return HttpResponse(s)
 
