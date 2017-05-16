@@ -3,24 +3,32 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+PARTS_OF_WORLD = (
+    (1, "US"),
+    (2, "EU"),
+    (3, "CSI"),
+    (4, "REST")
+)
+
 class Country(models.Model):
 
     name = models.CharField(max_length=50, unique=True)
     code = models.CharField(max_length=3, unique=True)
+    part = models.IntegerField(choices=PARTS_OF_WORLD, default=None, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
 class Post(models.Model):
 
-    plecat_din = models.ForeignKey(Country, related_name="plecat")
+    plecat_din = models.ForeignKey(Country, related_name="plecat", null=True, blank=True)
     sosit_in = models.ForeignKey(Country, related_name="sosit", null=True, blank=True)
     data_publ = models.DateTimeField(auto_now=True, verbose_name='data postarii')
 
     def __str__(self):
         return '{} - {}'.format(self.plecat_din, self.sosit_in)
 
-#################### dupa carte
+################################################## dupa carte
 class Category(models.Model):
 
     name = models.CharField(max_length=50, unique=True)
@@ -43,5 +51,3 @@ class Good(models.Model):
             return self.name
 
 # comm
-
-
