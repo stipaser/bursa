@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.db import models
 
 PARTS_OF_WORLD = (
@@ -19,6 +18,9 @@ class Country(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ('name',)
+
 class Post(models.Model):
 
     plecat_din = models.ForeignKey(Country, related_name="plecat", null=True, blank=True)
@@ -27,6 +29,10 @@ class Post(models.Model):
 
     def __str__(self):
         return '{} - {}'.format(self.plecat_din, self.sosit_in)
+
+    class Meta:
+        ordering = ['-data_publ']
+        verbose_name = "Postari transport"
 
 ################################################## dupa carte
 class Category(models.Model):
@@ -44,10 +50,16 @@ class Good(models.Model):
     price = models.FloatField(verbose_name='Price')
     in_stock = models.BooleanField(default=True, db_index=True, verbose_name='Stoc')
 
-    def __str__(self):
+    def get_is_stock(self):
         if self.in_stock:
-            return '%s (%s)' % (self.name, "+")
+            return "+"
         else:
-            return self.name
+            return "-"
 
-# comm
+    def __str__(self):
+        return '%s (%s)' % (self.name, self.get_is_stock())
+
+    class Meta:
+        ordering = ['name', '-price']
+
+    # comments
