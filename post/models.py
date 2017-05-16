@@ -26,6 +26,7 @@ class Post(models.Model):
     plecat_din = models.ForeignKey(Country, related_name="plecat", null=True, blank=True)
     sosit_in = models.ForeignKey(Country, related_name="sosit", null=True, blank=True)
     data_publ = models.DateTimeField(auto_now=True, verbose_name='data postarii')
+    description = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return '{} - {}'.format(self.plecat_din, self.sosit_in)
