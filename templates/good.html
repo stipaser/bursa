@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ good.name }}</title>
+</head>
+<body>
+    <h1>{{ good.name }}</h1>
+    <p>Category: {{ good.category.name }}</p>
+    <p>{{ good.price }}</p>
+    <p>{% if not good.in_stock %}Nu este in Stoc!!!{% endif %}</p>
+    <p><a href="{% url 'index' %}{{ good.category.id }}/">Back</a></p>
+
+</body>
+</html>

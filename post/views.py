@@ -42,19 +42,15 @@ def good(request, id):
     goods = Good.objects.all().order_by('-price')
     s = ""
     if id == None:
-        for good in goods:
-            s = s + "(" + str(good.pk) + ")" + good.name + " - " + str(good.price) + " cat:  " + good.category.name + "<br>"
+        good = Good.objects.first()
     else:
         try:
             good = Good.objects.get(pk=id)
-            s = "(" + str(good.pk) + ")" + good.name + " - " +str(good.price) + "<br>"
         except Good.DoesNotExist:
             raise Http404
 
-    if not good.in_stock:
-        s = s + " nu este in Stock"
 
-    return HttpResponse(s)
+    return render(request, 'good.html', {'good': good})
 
 
 

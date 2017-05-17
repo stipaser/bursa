@@ -10,11 +10,30 @@
     <ul>
         {% for cat in cats %}
         <li>
-            <a href="/post/index/{{ cat.id }}/">{{ cat.name }}</a>
+{#            <a href="/post/index/{{ cat.id }}/">{{ cat.name }}</a>#}
+            <a href="{% url 'index' %}{{ cat.id }}">{{ cat.name }}</a>
         </li>
         {% endfor %}
-
     </ul>
+    <h2>Marfuri:</h2>
+    <table>
+        <tr>
+            <th>Denumire</th>
+            <th>In stoc</th>
+        </tr>
+        {% for good in goods %}
+        <tr>
+            <td><a href="/post/good/{{ good.id }}/">{{ good.name }}</a></td>
+            <td>{% if good.in_stock %} (este) {% endif %}</td>
+        </tr>
+        {% endfor %}
 
+    </table>
+    <h2>Descrierea marfurilor:</h2>
+    {% if goods.0.price < 10000 %}
+        <p>{{ goods.0.price }}</p>
+    {% else %}
+       <p>Pretul este mai mare de 10000</p>
+    {% endif %}
 </body>
 </html>
