@@ -15,12 +15,7 @@ def posts(request):
 def post_detail(req, id):
 
     post = Post.objects.get(pk=id)
-    p = Post.objects.first()
-    return render(req, 'post/post_detail.html', {"post": post, 'p': p})
-
-
-
-
+    return render(req, 'post/post_detail.html', {"post": post})
 
 def index(request, id):
     #cat_id = request.GET['id']

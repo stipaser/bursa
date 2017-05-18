@@ -27,6 +27,8 @@ class Post(models.Model):
     sosit_in = models.ForeignKey(Country, related_name="sosit", null=True, blank=True)
     data_publ = models.DateTimeField(auto_now=True, verbose_name='data postarii')
     description = models.CharField(max_length=100, null=True, blank=True)
+    price = models.IntegerField(verbose_name='Pretul transportului', default=0)
+    weigth = models.IntegerField(verbose_name='Greutate, tone', default=0)
 
     def __str__(self):
         return '{} - {}'.format(self.plecat_din, self.sosit_in)
