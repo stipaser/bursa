@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.plecat_din }} - {{ post.sosit_in }}</title>
+</head>
+<body>
+<h2>DETALII ANUNT:</h2>
+<p>{{ post.plecat_din }} - {{ post.sosit_in }}</p>
+<p>{{ post.description | default:"nothing"  }}</p>
+<p>{{ post.data_publ }}</p>
+<p><a href="{% url 'posts_1' %}">Back</a></p>
+
+
+</body>
+</html>

@@ -9,11 +9,15 @@ from django.http import HttpResponse, Http404
 def posts(request):
 
     posts = Post.objects.all().order_by('data_publ')
-    s=''
-    for p in posts:
-        s = s + str(p.id) +  p.__str__() + "<br>"
+    return render(request, 'post/post.html', {'posts': posts})
 
-    return HttpResponse(s)
+
+def post_detail(req, id):
+
+    post = Post.objects.get(pk=id)
+    p = Post.objects.first()
+    return render(req, 'post/post_detail.html', {"post": post, 'p': p})
+
 
 
 
@@ -33,8 +37,8 @@ def index(request, id):
 
     goods = Good.objects.filter(category=cat).order_by('name')
 
-    content = {"category": cat, "cats": cats, "goods": goods}
-    return render(request, 'index.html', content)
+    context = {"category": cat, "cats": cats, "goods": goods}
+    return render(request, 'index.html', context)
 
 
 

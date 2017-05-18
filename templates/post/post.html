@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ posts.0 }}</title>
+</head>
+<body>
+<h2>Anunturi transport</h2>
+{% for p in posts %}
+    <p><a href="/post/{{ p.id }}">{{ p.plecat_din }} - {{ p.sosit_in }}</a></p>
+{% endfor %}
+
+</body>
+</html>
