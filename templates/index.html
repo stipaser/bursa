@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
     <title>{{ category.name }}</title>
 
     <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" type="text/css" href="{%  static "main.css" %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -19,8 +21,11 @@
     </script>
 </head>
 <body>
+<div class="head">
+    <h1>VINZARE ONLINE</h1>
+</div>
 <div class="container-fluid">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <h2>Category:</h2>
         <ul>
             {% for cat in cats %}
@@ -31,26 +36,30 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
     <h2>Marfuri:</h2>
-    <table>
+    <table class="table table-striped">
         <tr>
+            <th>#</th>
             <th>Denumire</th>
             <th>In stoc</th>
+            <th>Price</th>
         </tr>
         {% for good in goods %}
         <tr>
+            <td>{{ forloop.counter }}</td>
             <td><a href="/post/good/{{ good.id }}/">{{ good.name }}</a></td>
-            <td>{% if good.in_stock %} (este) {% endif %}</td>
+            <td>{% if good.in_stock %} + {% else %} - {% endif %}</td>
+            <td>{{ good.price|floatformat:"2"}}</td>
         </tr>
         {% endfor %}
 
     </table>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <h2>Descrierea marfurilor:</h2>
         {% if goods.0.price < 10000 %}
-            <p>{{ goods.0.price }}</p>
+            <p>{{ goods|random }}</p>
         {% else %}
            <p>Pretul este mai mare de 10000</p>
         {% endif %}
