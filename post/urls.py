@@ -20,7 +20,7 @@ from . import views
 
 urlpatterns = [
        url(r'^$', views.posts, name="posts_1"),
-       url(r'^((?P<id>\d+)/)$', views.post_detail, name="posts_detail"),
+       url(r'^(?:(?P<id>\d+)/)?$', views.post_detail, name="posts_detail"),
        url(r'^index/(?:(?P<id>\d+)/)?$', views.index, name='index'),
-       url(r'^good/((?P<id>\d+)/)?$', views.good, name='good'),
+       url(r'^good/(?:(?P<id>\d+)/)?$', views.good, name='good'),
 ]

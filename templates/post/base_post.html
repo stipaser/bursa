@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %} {% endblock %} || Arcobaleno Store</title>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" type="text/css" href="{%  static "main.css" %}">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'post.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
       integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -21,17 +20,14 @@
         crossorigin="anonymous">
     </script>
 </head>
-<body>
-<div class="jumbotron text-center">
-    <h1>ARCOBALENO STORE</h1>
-    <p>Cumpara aici tot de ce ai nevoie acum!</p>
-</div>
-<div class="container-fluid">
-    {% block main %}
-    {% endblock %}
-</div>
-<div class="footer">
-    <h5>Copyright ©2017 Arcobaleno.com All Rights Reserved.</h5>
-</div>
-</body>
+    <div class="jumbotron text-center">
+        <h1>BURSA DE TRANSPORT</h1>
+        <p>posteaza, cauta transport international</p>
+    </div>
+    <body>
+       {% block main %} {% endblock %}
+    </body>
+    <div class="footer">
+        <h5 id="dreturi">Toate dretpturile sunt rezervate</h5>
+    </div>
 </html>

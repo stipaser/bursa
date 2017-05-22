@@ -6,6 +6,8 @@
         <p>Category: {{ good.category.name }}</p>
         <p>Price: {{ good.price }}</p>
         <p>{% if not good.in_stock %}Nu este in Stoc!!!{% endif %}</p>
-        <p><a href="{% url 'index' %}{{ good.category.id }}/">Back</a></p>
+        {% url 'index' id=good.category.id as index_url %}
+        <p><a href="{{ index_url }}">Back</a></p>
     </div>
+{% include 'includes.html' %}
 {% endblock %}

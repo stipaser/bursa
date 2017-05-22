@@ -10,13 +10,14 @@
             {% for cat in cats %}
             <li>
         {#<a href="/post/index/{{ cat.id }}/">{{ cat.name }}</a>#}
-                <a href="{% url 'index' %}{{ cat.id }}">{{ cat.name }}</a>
+                <a href="{% url 'index'  cat.id %}">{{ cat.name }}</a>
             </li>
             {% endfor %}
         </ul>
     </div>
     <div class="col-md-6">
     <h2>Marfuri:</h2>
+    
     <table class="table table-striped">
         <tr>
             <th>#</th>
@@ -27,13 +28,15 @@
         {% for good in goods %}
         <tr>
             <td>{{ forloop.counter }}</td>
-            <td><a href="/post/good/{{ good.id }}/">{{ good.name }}</a></td>
+            <td><a href="{% url 'good' good.id %}">{{ good.name }}</a></td>
             <td>{% if good.in_stock %} + {% else %} - {% endif %}</td>
             <td>{{ good.price|floatformat:"2"}}</td>
         </tr>
         {% endfor %}
-
     </table>
+
+
+
     </div>
     <div class="col-md-3">
         <h2>Descrierea marfurilor:</h2>
@@ -44,5 +47,21 @@
         {% endif %}
     </div>
     </div>
+{% if goods.paginator.num_page > 1 %}
+    <div>
+        {% if goods.has_previous %}
+            <div>
+                <a href="{% url 'index' id=caregory.pk %}?page={{ goods.previous_page_number }}">&lt;000</a>
+            </div>
+        {% endif %}
+        {% if goods.has_next %}
+            <div>
+                <a href="{% url 'index' id=category.id %}?page={{ goods.next_page_number }}">&gt;111</a>
+            </div>
+        {% endif %}
+
+{%  endif %}
+    </div>
+
 </div>
 {% endblock %}
